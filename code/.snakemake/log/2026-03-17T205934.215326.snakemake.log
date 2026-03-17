@@ -1,0 +1,25 @@
+Assuming unrestricted shared filesystem usage.
+host: amarcos
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                          count
+-------------------------  -------
+comparison_sliding_window        1
+total                            1
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 17 20:59:34 2026]
+localrule comparison_sliding_window:
+    input: zika_ref.fasta, zika_brazil.fasta
+    output: resultado_genoma_completo.txt
+    jobid: 0
+    reason: Missing output files: resultado_genoma_completo.txt
+    resources: tmpdir=/tmp
+[Tue Mar 17 20:59:36 2026]
+Finished jobid: 0 (Rule: comparison_sliding_window)
+1 of 1 steps (100%) done
+Complete log(s): /home/afonso/bioinf/Vscode/bioinformatica/projeto/code/.snakemake/log/2026-03-17T205934.215326.snakemake.log

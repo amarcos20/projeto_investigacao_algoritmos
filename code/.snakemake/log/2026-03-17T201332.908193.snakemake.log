@@ -1,0 +1,3 @@
+SyntaxError in file "/home/afonso/bioinf/Vscode/bioinformatica/projeto/code/pipeline_resultado.smk", line 11:
+No rule keywords allowed after run/shell/script/notebook/wrapper/template_engine/cwl in rule comparison.:
+None

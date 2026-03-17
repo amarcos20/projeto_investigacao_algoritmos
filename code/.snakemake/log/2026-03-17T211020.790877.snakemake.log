@@ -1,0 +1,37 @@
+Assuming unrestricted shared filesystem usage.
+host: amarcos
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+all                      1
+compare_all_kmers        1
+total                    2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 17 21:10:20 2026]
+localrule compare_all_kmers:
+    input: zika_ref.fasta, zika_brazil.fasta
+    output: resultado_workshop.txt
+    jobid: 1
+    reason: Missing output files: resultado_workshop.txt
+    resources: tmpdir=/tmp
+[Tue Mar 17 21:10:29 2026]
+Finished jobid: 1 (Rule: compare_all_kmers)
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 17 21:10:29 2026]
+localrule all:
+    input: resultado_workshop.txt
+    jobid: 0
+    reason: Input files updated by another job: resultado_workshop.txt
+    resources: tmpdir=/tmp
+[Tue Mar 17 21:10:29 2026]
+Finished jobid: 0 (Rule: all)
+2 of 2 steps (100%) done
+Complete log(s): /home/afonso/bioinf/Vscode/bioinformatica/projeto/code/.snakemake/log/2026-03-17T211020.790877.snakemake.log

@@ -1,0 +1,4 @@
+SyntaxError in file "/home/afonso/bioinf/Vscode/bioinformatica/projeto/code/pipeline_resultado.smk", line 69:
+invalid syntax. Perhaps you forgot a comma?:
+												dist_e = editDistanceMemo ( s1 [ ] , s2 [ ] )
+

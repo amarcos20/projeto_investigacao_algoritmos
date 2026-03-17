@@ -1,0 +1,37 @@
+Assuming unrestricted shared filesystem usage.
+host: amarcos
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+all               1
+comparison        1
+total             2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 17 20:30:23 2026]
+localrule comparison:
+    input: variant_1.fasta, variant_2.fasta
+    output: distancia_final.txt
+    jobid: 1
+    reason: Missing output files: distancia_final.txt; Code has changed since last execution
+    resources: tmpdir=/tmp
+[Tue Mar 17 20:30:25 2026]
+Finished jobid: 1 (Rule: comparison)
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Mar 17 20:30:25 2026]
+localrule all:
+    input: distancia_final.txt
+    jobid: 0
+    reason: Input files updated by another job: distancia_final.txt
+    resources: tmpdir=/tmp
+[Tue Mar 17 20:30:25 2026]
+Finished jobid: 0 (Rule: all)
+2 of 2 steps (100%) done
+Complete log(s): /home/afonso/bioinf/Vscode/bioinformatica/projeto/code/.snakemake/log/2026-03-17T203023.828367.snakemake.log
