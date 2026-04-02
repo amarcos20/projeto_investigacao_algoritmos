@@ -1,7 +1,0 @@
-Assuming unrestricted shared filesystem usage.
-host: amarcos
-Building DAG of jobs...
-MissingInputException in rule all in file "/home/afonso/bioinf/Vscode/bioinformatica/projeto/code/pipeline_resultado.smk", line 1:
-Missing input files for rule all:
-    affected files:
-        resultado_workshop.txt

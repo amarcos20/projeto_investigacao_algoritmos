@@ -1,3 +1,0 @@
-DISTANCIA GENOMA COMPLETO (K=500)
-Hamming Total: 21298
-Edit Total: 5697
