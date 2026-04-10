@@ -1,77 +1,91 @@
-# 🧬 Workshop: Sequence Metrics & Similarity in SARS-CoV-2
+# Workshop: Sequence Metrics & Similarity in SARS-CoV-2
 
-Este repositório contém o material prático e o código base para o workshop de Bioinformática focado em **Métricas de Comparação de Sequências**. O objetivo é capacitar os alunos a identificar variações genéticas entre estirpes virais utilizando algoritmos fundamentais.
-
----
-
-##  Motivação Biológica
-
-A comparação de sequências é o "pão com manteiga" da vigilância genómica. Ao analisar o genoma do SARS-CoV-2, que podem alterar a forma como o vírus entra nas células humanas ou como escapa aos anticorpos.
-
-### Tópicos para Investigação (Google Scholar):
-Para aprofundar o conhecimento teórico, sugere-se a pesquisa pelos seguintes termos:
-* *“Comparative genomics of SARS-CoV-2 variants: impact of point mutations and indels”*
-* *“Sequence similarity metrics for viral evolution and surveillance”*
-* *“Dynamic programming in sequence alignment: Levenshtein vs Hamming”*
-* *“Dot plot analysis for genomic structural variations”*
+Este repositório contém o material prático para o workshop de Bioinformática focado em **Métricas de Comparação de Sequências**. O objetivo é comparar variantes do SARS-CoV-2 utilizando algoritmos fundamentais de alinhamento e visualização genómica.
 
 ---
 
-##  Instalação e Setup
-
-Para correres o notebook e as análises, primeiro clona este repositório e instala as dependências:
+## Setup Local
 
 ```bash
 # 1. Clonar o repositório
-git clone [https://github.com/teu-utilizador/nome-do-repo.git](https://github.com/teu-utilizador/nome-do-repo.git)
+git clone https://github.com/amarcos20/projeto_investigacao_algoritmos.git
 
 # 2. Entrar na pasta
-cd nome-do-repo
+cd projeto_investigacao_algoritmos
 
-# 3. Instalar bibliotecas necessárias
-pip install numpy pandas matplotlib biopython python-Levenshtein
+# 3. Instalar dependências
+pip install numpy matplotlib
 ```
-##  Dados do Projeto (Inputs)
 
-O workflow utiliza dois genomas inteiros reais extraídos do **NCBI GenBank**:
 
-1.  **Referência (Wuhan-Hu-1):** [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2) - O genoma original de 2019.
-2.  **Variante (Delta Like):** [MZ359844.1](https://www.ncbi.nlm.nih.gov/nuccore/MZ359844.1) - Um isolado real com múltiplas mutações.
+## Dados do Projeto
 
----
+O workflow usa dois genomas completos reais do **NCBI GenBank**, já pré-alinhados com o algoritmo de Needleman-Wunsch:
 
-##  O "Puzzle" do Workflow (Atividade Prática)
+| Ficheiro | Accession | Descrição |
+|---|---|---|
+| `SARS-CoV-2_ref_aln.fasta` | [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2) | Wuhan-Hu-1 — estirpe de referência (2019) |
+| `SARS-CoV-2_var_aln.fasta` | [MZ359844.1](https://www.ncbi.nlm.nih.gov/nuccore/MZ359844.1) | Variante Indiana Delta-like (2021) |
 
-O desafio para cada grupo é montar o fluxo de análise no Notebook e interpretar os resultados de **3 tentativas** (reads) diferentes.
-
-### Passo-a-Passo:
-1.  **Extração:** Usar a função `get_synced_reads` para obter fragmentos aleatórios dos dois genomas.
-2.  **Cálculo Rígido:** Aplicar a `Hamming_Distance` para medir mutações pontuais.
-3.  **Cálculo Flexível:** Aplicar a `edit_distance_dp` (Programação Dinâmica/Tabulação) para lidar com possíveis indels.
-4.  **Visualização:** Gerar o `plot_dotplot` para identificar padrões visuais de similaridade.
-5.  **Análise:** Comparar as métricas de `hammingSimilarity` e `editSimilarity`.
+Os `-` nas sequências representam **gaps** — posições onde existe uma inserção/deleção relativamente à outra estirpe.
 
 ---
 
-##  Interpretação de Resultados e Conclusão
+## Workflow do Notebook
 
-Os grupos devem focar-se na interpretação biológica e técnica dos dados:
-
-* **Identidade vs Similaridade:** Por que é que a distância de Hamming dá erro ou valores extremamente baixos em zonas com "gaps" (deleções/inserções)?
-* **Padrões Visuais:** No Dot Plot, o que representa uma diagonal perfeitamente contínua versus uma diagonal com "saltos" ou quebras?
-* **Eficiência Algorítmica:** Qual a diferença prática observada entre a solução recursiva com *Memoization* e a solução por *Tabulação* (Programação Dinâmica)?
-* **Impacto Biológico:** Se a similaridade na zona da proteína Spike (posições ~21500-25400) for baixa, qual o impacto potencial na eficácia das vacinas?
-
----
-
-##  Algoritmos Implementados no Notebook
-
-O código base inclui implementações didáticas de:
-* **Distância de Hamming:** Comparação exata posição a posição (exige comprimentos iguais).
-* **Distância de Edição (Levenshtein):** * Versão Recursiva com **Memoization** (Otimização de memória).
-    * Versão com **Programação Dinâmica (Tabulação)** usando matrizes NumPy/Pandas.
-* **Dot Plot Visual:** Representação gráfica da matriz de similaridade binária.
+```
+FASTA pré-alinhados
+      ↓
+ Exercício 1 — Ler as sequências (read_fasta)
+      ↓
+ Exercício 2 — Estatísticas globais do alinhamento (matches / mismatches / gaps)
+      ↓
+ Exercício 3 — Divergência por janelas de 1 000 bp  [código dado]
+      ↓
+ Exercício 4 — Gráfico de barras com região Spike assinalada
+      ↓
+ Exercício 5 — Interpretação biológica (3 perguntas)
+```
 
 ---
 
-**Nota:** Este workshop simula um ambiente de investigação real. Certifiquem-se de que os vossos resultados são reprodutíveis e documentem as vossas observações no final do Notebook! 
+## Exercícios a Completar (10 min)
+
+### Exercício 1 — `read_fasta`
+Implementar uma função que lê um ficheiro `.fasta` e devolve `(header, sequence)`.
+
+### Exercício 2 — `explore_alignment`
+Percorrer o alinhamento coluna a coluna e contar **matches**, **mismatches** e **gaps**. Calcular a identidade global (%).
+
+### Exercício 4 — Gráfico de barras
+Com os dados de divergência por janela já calculados, criar um `ax.bar(...)` com a posição no genoma em X e a divergência por bp em Y. Assinalar a região Spike a vermelho.
+
+> O Exercício 3 (janelas deslizantes) e o gráfico final completo têm o código fornecido — basta correr.
+
+---
+
+## Perguntas de Interpretação
+
+**Q1.** Qual é a identidade global entre os dois genomas? O que significa em termos evolutivos?
+
+**Q2.** Olhando para o gráfico de barras, qual a região do genoma com maior divergência? Coincide com alguma região biologicamente relevante?
+
+**Q3.** O sítio de clivagem por furina (~23 603 nt) está associado à mutação **P681R** na variante Delta. Porquê é que uma mutação neste sítio pode aumentar a infectividade do vírus?
+
+---
+
+## Algoritmos Abordados
+
+| Algoritmo | Descrição |
+|---|---|
+| **Needleman-Wunsch** | Alinhamento global (aplicado no pré-processamento dos dados) |
+| **Identidade de sequência** | Contagem de matches/mismatches em alinhamento coluna a coluna |
+| **Janela deslizante** | Divergência local ao longo do genoma em blocos de 1 000 bp |
+
+---
+
+## Motivação Biológica — Tópicos para Investigação
+
+* *"Comparative genomics of SARS-CoV-2 variants: impact of point mutations and indels"*
+* *"Sequence similarity metrics for viral evolution and surveillance"*
+* *"Furin cleavage site mutations and SARS-CoV-2 Delta variant transmissibility"*
