@@ -20,7 +20,7 @@ pip install numpy matplotlib
 
 ## Dados do Projeto
 
-O workflow usa dois genomas completos reais do **NCBI GenBank**, já pré-alinhados com o algoritmo de Needleman-Wunsch:
+O workflow usa dois genomas completos reais do **NCBI GenBank**, já pré-alinhados.
 
 | Ficheiro | Accession | Descrição |
 |---|---|---|
